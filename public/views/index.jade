@@ -1,0 +1,14 @@
+-var list = ['Joe', 'Steve', 'Ronnie']
+html
+head
+    title My Jade App
+body(class='myClass')
+    h1(id='MyId')  My Jade App
+    p
+        h2  #{titleString}
+        ul
+            each name in list
+                li= name
+        ul
+            each jersey in jerseys
+                li= jersey
