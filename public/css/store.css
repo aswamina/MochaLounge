@@ -7,5 +7,9 @@
 }
 
 .marketText {
-    color: brown
+    color: brown;
+}
+
+.textHidden {
+    visibility: hidden;
 }
