@@ -29,9 +29,9 @@ gulp.task('inject', function () {
     };
 
     gulp.src('./public/index.html')
-    .pipe(wiredep(options))
-    .pipe(gulp.dest('./public'));
-    
+        .pipe(wiredep(options))
+        .pipe(gulp.dest('./public'));
+
     return gulp.src('./public/views/*.html')
         .pipe(wiredep(options))
         .pipe(inject(injectSrc, injectOptions))
