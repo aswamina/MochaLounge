@@ -16,7 +16,13 @@ gulp.task('style', function () {
 gulp.task('inject', function () {
     var wiredep = require('wiredep').stream;
     var inject = require('gulp-inject');
-    var injectSrc = gulp.src(['./public/css/*.css', './public/js/*.js', './public/js/controllers/*.js'], {
+    var injectSrc = gulp.src([
+        './public/css/*.css',
+        './public/js/*.js',
+        './public/js/services/*.js',
+        './public/js/controllers/*.js',
+        './models/*.js'
+    ], {
         read: false
     });
     var injectOptions = {
