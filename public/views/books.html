@@ -1,6 +1,5 @@
 <div class="panel" ng-controller="StoreController">
-    <div class="panel-body" ng-repeat="book in books">
-        {{book.name}}
+    <div class="panel-body" ng-repeat="book in booksOnSale">
         <!--/stories-->
         <div class="row">
             <br>
@@ -9,25 +8,22 @@
             </div>
             <div class="col-md-10 col-sm-9">
                 <h3>{{book.name}}</h3>
+                <em class="pull-right"><strike>{{book.price | currency}}</strike></em>
+                <hr>
+                <em class="pull-right">{{ discountPrice(book.price, book.discount) | currency}}</em>
                 <div class="row">
                     <div class="col-xs-9">
                         <h4><span class="label label-default">{{book.author}}</span></h4>
                         <h4>
-                  <small style="font-family:courier,'new courier';" class="text-muted">2 hours ago  • <a href="#" class="text-muted">Read More</a></small>
-                  </h4></div>
+                            <small style="font-family:courier,'new courier';" class="text-muted">2 hours ago  • <a href="#" class="text-muted">Read More</a></small>
+                        </h4>
+                    </div>
                     <div class="col-xs-3"></div>
                 </div>
                 <br>
                 <br>
             </div>
         </div>
-        <hr>
-
-
-        <hr>
-        <!--/stories-->
-
-
         <a href="/" class="btn btn-primary pull-right btnNext">More <i class="glyphicon glyphicon-chevron-right"></i></a>
     </div>
 </div>
