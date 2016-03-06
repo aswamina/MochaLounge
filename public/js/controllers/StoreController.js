@@ -1,7 +1,8 @@
 (function () {
-    angular.module('StoreCtrl', []).controller('StoreController', function ($scope) {
+    angular.module('StoreCtrl', []).controller('StoreController', function ($scope, BookService) {
 
         console.log('Inside StoreController');
+        /*
         var books = [
             {
                 name: 'Programming Language Design Concepts',
@@ -16,15 +17,15 @@
                         body: 'I love this book!',
                         author: 'joe@example.org',
                         createdOn: 1397490980837
-                        },
+                    },
                     {
                         stars: 1,
                         body: 'This book sucks.',
                         author: 'tim@example.org',
                         createdOn: 1397490980837
-                        }
+                    }
                     ]
-                },
+            },
             {
                 name: 'Getting Started with Julia',
                 author: 'Ivo Balbaert',
@@ -38,15 +39,15 @@
                         body: 'I think this book was just OK, could honestly use more examples, IMO.',
                         author: 'JohnSmith@example.org',
                         createdOn: 1397490980837
-                        },
+                    },
                     {
                         stars: 4,
                         body: 'Awesome book, this is for me!',
                         author: 'cRocks@example.org',
                         createdOn: 1397490980837
-                        }
+                    }
                     ]
-                },
+            },
             {
                 name: 'Concepts of Programming Languages',
                 author: 'Robert W. Sebesta',
@@ -60,21 +61,21 @@
                         body: 'This book is WAY too expensive for its value.',
                         author: 'JaneDoe@example.org',
                         createdOn: 1397490980837
-                        },
+                    },
                     {
                         stars: 1,
                         body: 'IMO: High Price != High Quality.',
                         author: 'Louis@example.org',
                         createdOn: 1397490980837
-                        },
+                    },
                     {
                         stars: 1,
                         body: 'Don\'t waste your time on this book!',
                         author: 'badattitudeguy@example.org',
                         createdOn: 1397490980837
-                        }
+                    }
                     ]
-                },
+            },
             {
                 name: 'Javascript - Concepts and Techniques',
                 author: 'Tina Spain McDuffie',
@@ -88,17 +89,38 @@
                         body: 'This book is extremely well organized.',
                         author: 'scottkelman@example.org',
                         createdOn: 1397490980837
-                        },
+                    },
                     {
                         stars: 5,
                         body: 'I would recommend.',
                         author: 'ppeters@example.org',
                         createdOn: 1397490980837
-                        }
+                    }
                     ]
-                }
+            }
             ];
+            */
+        var onBooksComplete = function (data) {
+            $scope.books = data;
+        };
 
-        $scope.books = books;
+        var onSaleBooksComplete = function (data) {
+            $scope.booksOnSale = data;
+        };
+
+        var onError = function (reason) {
+            $scope.error = 'Could not fetch the books data.';
+        };
+
+        $scope.discountPrice = function (price, discountPercent) {
+            var result = (1 - (parseFloat(discountPercent) / 100.0)) * price;
+            return result;
+        };
+
+        BookService.getBooks().then(onBooksComplete, onError);
+
+        BookService.getBooksOnSale().then(onSaleBooksComplete, onError);
+
+        //$scope.books = books;
     });
 }());
