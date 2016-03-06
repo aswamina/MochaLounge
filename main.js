@@ -1,5 +1,6 @@
 var express = require('express'),
-    http = require('http');
+    http = require('http'),
+    bookModel = require('./models/bookModel');
 
 var app = express();
 
@@ -33,8 +34,26 @@ app.get('/', function (request, response) {
 });
 */
 
-app.get('/Books', function (request, response) {
-    response.send('Hello Books');
+app.get('/getBooks', function (request, response) {
+    bookModel.find(function (err, data) {
+        if (err) {
+            response.send(500, 'There was an error getting books - tough luck.');
+        } else {
+            response.setHeader('Content-Type', 'application/json');
+            response.status(200).json(data);
+        }
+    });
+});
+
+app.get('/getBooksOnSale', function (request, response) {
+    bookModel.find({discount: {$exists:true}}, function (err, data) {
+        if (err) {
+            response.send(500, 'There was an error getting books on sale - tough luck.');
+        } else {
+            response.setHeader('Content-Type', 'application/json');
+            response.status(200).json(data);
+        }
+    });
 });
 
 // Use Angular routing
